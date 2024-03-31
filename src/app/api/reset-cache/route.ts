@@ -8,6 +8,7 @@ export async function GET(request: Request) {
   const errors: any[] = [];
 
   for (const file of files) {
+    if (file === ".gitignore") continue;
     try {
       await fs.rm(`${path}/${file}`);
     } catch (error) {

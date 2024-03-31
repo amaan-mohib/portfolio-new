@@ -42,6 +42,7 @@ export default async function Links() {
               )}
             >
               <img
+                alt={link.data.title}
                 src={link.data.image}
                 className="h-[90px] w-[90px] bg-black object-cover"
               />

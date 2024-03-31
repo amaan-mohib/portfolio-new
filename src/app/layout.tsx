@@ -7,6 +7,7 @@ import MainWrapper from "../components/MainWrapper/MainWrapper";
 import BackgroundSwitcher from "../components/BackgroundSwitcher";
 import { cookies } from "next/headers";
 import { getCachedData } from "@/actions/getCachedData";
+import { convert } from "html-to-text";
 
 const inter = Inter({ subsets: ["latin"] });
 const sourceSerif = Source_Serif_4({
@@ -25,12 +26,14 @@ export async function generateMetadata({
 }: any): Promise<Metadata> {
   const { info } = await getCachedData("info");
 
+  const description = convert(info.description);
+
   return {
     title: {
       template: `${info.name} - %s`,
       default: `${info.name}`,
     },
-    description: info.description,
+    description,
     keywords: ["Next.js", "React", "JavaScript", "Portfolio", info.name],
     authors: [{ name: info.name }],
     creator: info.name,
@@ -43,7 +46,7 @@ export async function generateMetadata({
       },
       type: "profile",
       siteName: info.name,
-      description: info.description,
+      description,
       images: [
         {
           url: "https://amaan-mohib.github.io/assets/img/favicon.png",

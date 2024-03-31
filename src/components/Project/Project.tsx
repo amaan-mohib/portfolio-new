@@ -39,6 +39,7 @@ const Project: FC<ProjectsProps> = ({ project }) => (
       {project.languages ? (
         project.languages.map((lang: string) => (
           <div
+            key={lang}
             className={classNames(
               "w-min rounded-full px-[10px] py-[2px] text-xs text-white",
               languages[lang],

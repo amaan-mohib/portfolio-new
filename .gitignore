@@ -36,7 +36,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-fetchedData
-
 # Sentry Config File
 .sentryclirc
