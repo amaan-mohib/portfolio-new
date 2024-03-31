@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import MainWrapper from "./components/MainWrapper/MainWrapper";
+import BackgroundSwitcher from "./components/BackgroundSwitcher";
 
 const inter = Inter({ subsets: ["latin"] });
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--display-font",
+});
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--body-font",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +29,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${sourceSerif.variable} ${ibmPlexMono.variable} ${ibmPlexMono.className}`}
+      >
+        <BackgroundSwitcher>
+          <div className="relative px-3 max-w-3xl mx-auto">
+            <Header />
+            <MainWrapper>{children}</MainWrapper>
+            <Footer />
+          </div>
+        </BackgroundSwitcher>
+      </body>
     </html>
   );
 }
