@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nav-height: 80px;
+  --footer-height: 50px;
+
+  &[data-theme='light'] {
+    --foreground-rgb: 0, 0, 0;
+    --invert-foreground-rgb: 255, 255, 255;
+    --secondary-color: rgb(57, 57, 57);
+
+    --bg-home: #F8F6E3;
+    --bg-projects: #97E7E1;
+    --bg-links: #FAD4D4;
+
+    color-scheme: light;
+  }
+
+  &[data-theme='dark'] {
+    --foreground-rgb: 255, 255, 255;
+    --invert-foreground-rgb: 0, 0, 0;
+    --secondary-color: rgb(212 212 212);
+
+    --bg-home: #0B2447;
+    --bg-projects: #704264;
+    --bg-links: #C70039;
+
+    color-scheme: dark;
+  }
+
+  --bg-color: var(--bg-home);
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: var(--bg-color);
+  transition: background-color 400ms;
+  background-size: cover;
+}
+
+a:not(.remove-effect) {
+  box-shadow: inset 0 0 0 0 rgb(var(--foreground-rgb));
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+  padding: 0 .25rem;
+  margin: 0 -.25rem;
+
+  &:hover {
+    color: rgb(var(--invert-foreground-rgb));
+    box-shadow: inset 0 -200px 0 0 rgb(var(--foreground-rgb));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

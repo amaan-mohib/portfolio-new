@@ -11,15 +11,20 @@ const BackgroundSwitcher: React.FC<BackgroundSwitcherProps> = ({
   const pathname = usePathname();
 
   useEffect(() => {
-    let bgColor = "#000";
+    let bgColor = "var(--bg-home)";
+
     switch (pathname) {
       case "/projects":
-        bgColor = "#304e69";
+        bgColor = "var(--bg-projects)";
+        break;
+      case "/links":
+        bgColor = "var(--bg-links)";
         break;
       default:
-        bgColor = "#000";
+        bgColor = "var(--bg-home)";
     }
     document.body.style.backgroundColor = bgColor;
+    document.documentElement.style.setProperty("--bg-color", bgColor);
   }, [pathname]);
 
   return children;

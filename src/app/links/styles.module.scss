@@ -1,0 +1,8 @@
+.link {
+  border-color: rgba(var(--foreground-rgb), .2);
+  transition: border-color 400ms;
+
+  &:hover {
+    border-color: rgba(var(--foreground-rgb), 1);
+  }
+}

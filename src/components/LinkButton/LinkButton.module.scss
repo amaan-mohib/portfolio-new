@@ -1,0 +1,8 @@
+.LinkButton {
+  border-color: rgba($color: var(--foreground-rgb), $alpha: .2);
+  transition: background-color 400ms;
+
+  &:hover {
+    background-color: rgba($color: var(--foreground-rgb), $alpha: .1);
+  }
+}

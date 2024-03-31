@@ -1,0 +1,16 @@
+.description {
+  a {
+    text-decoration: underline;
+    text-decoration-color: #0ea5e9;
+    padding: 0;
+    margin: 0;
+
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+      color: rgb(var(--foreground-rgb));
+      text-decoration-color: #1d4ed8;
+    }
+  }
+}
