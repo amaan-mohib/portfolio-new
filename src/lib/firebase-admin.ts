@@ -1,5 +1,6 @@
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
 
 export const initializeFirebaseAdmin = async () => {
   try {
@@ -14,12 +15,15 @@ export const initializeFirebaseAdmin = async () => {
 
       initializeApp({
         credential: cert(serviceAccount),
+        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       });
     }
 
     const db = getFirestore();
+    const storage = getStorage().bucket();
     return {
       db,
+      storage,
     };
   } catch (error) {
     throw error;

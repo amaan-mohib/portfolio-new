@@ -1,36 +1,27 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
+import { initializeFirebaseAdmin } from "@/lib/firebase-admin";
 
 export const dynamic = "force-dynamic"; // defaults to auto
 export async function GET(request: Request) {
-  const path = process.cwd() + "/src/fetchedData";
-  const files = await fs.readdir(path);
-  const errors: any[] = [];
+  try {
+    const path = "fetchedData";
+    const { storage } = await initializeFirebaseAdmin();
 
-  for (const file of files) {
-    if (file === ".gitignore") continue;
-    try {
-      await fs.rm(`${path}/${file}`);
-    } catch (error) {
-      errors.push(error);
-      console.log(error);
-    }
-  }
+    await storage.deleteFiles({
+      prefix: path,
+    });
 
-  if (errors.length > 0) {
+    return NextResponse.json({
+      status: 200,
+      message: "ok",
+    });
+  } catch (error) {
     return NextResponse.json(
       {
-        status: 400,
-        message: errors.map((e) => `${e}`),
+        status: 500,
+        message: error,
       },
-      {
-        status: 400,
-      },
+      { status: 500 },
     );
   }
-
-  return NextResponse.json({
-    status: 200,
-    message: "ok",
-  });
 }

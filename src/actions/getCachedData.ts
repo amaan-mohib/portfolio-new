@@ -1,23 +1,30 @@
 "use server";
 
 import { initializeFirebaseAdmin } from "@/lib/firebase-admin";
-import { promises as fs } from "fs";
+import { getDownloadURL } from "firebase-admin/storage";
 
 export const getCachedData = async (
   type: "info" | "projects" | "links" | "home",
 ) => {
-  let json = "";
+  const { db, storage } = await initializeFirebaseAdmin();
+  let json = null;
   let getData = false;
 
-  const path = process.cwd() + `/src/fetchedData/${type}.json`;
+  const path = `fetchedData/${type}.json`;
+  const file = storage.file(path);
 
   try {
-    json = await fs.readFile(path, "utf-8");
+    const fileUrl = await getDownloadURL(file);
+    const response = await fetch(fileUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch file: ${response.statusText}`);
+    }
+    json = await response.json();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
   if (json) {
-    const data = JSON.parse(json);
+    const data = json;
     const threeDays = 3 * 24 * 60 * 60 * 1000;
     if (new Date().getTime() - new Date(data.createdAt).getTime() > threeDays) {
       getData = true;
@@ -30,7 +37,6 @@ export const getCachedData = async (
 
   if (getData) {
     try {
-      const { db } = await initializeFirebaseAdmin();
       let data = {};
       if (type === "home") {
         const info: any = (
@@ -78,7 +84,11 @@ export const getCachedData = async (
         };
       }
 
-      await fs.writeFile(path, JSON.stringify(data), "utf-8");
+      const buffer = Buffer.from(JSON.stringify(data), "utf8");
+      await file.save(buffer, {
+        contentType: "application/json",
+        public: true,
+      });
 
       return data;
     } catch (error) {
@@ -86,5 +96,5 @@ export const getCachedData = async (
     }
   }
 
-  return JSON.parse(json || "{}");
+  return json || {};
 };
