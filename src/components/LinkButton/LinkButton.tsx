@@ -13,6 +13,7 @@ const LinkButton: FC<ButtonProps> = ({ children, target, title, ...rest }) => {
       {...rest}
       target={target}
       title={title}
+      aria-label={title}
       className={classNames(
         "remove-effect flex items-center rounded-lg border p-1",
         styles.LinkButton,

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.scss";
 import Header from "../components/Header/Header";
@@ -19,6 +19,10 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600", "700"],
   variable: "--body-font",
 });
+
+export const viewport: Viewport = {
+  themeColor: "black",
+};
 
 export async function generateMetadata({
   params,

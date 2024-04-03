@@ -52,6 +52,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ initialTheme }) => {
   return (
     <>
       <LinkButton
+        title="Toggle theme"
         href="#"
         data-theme={theme}
         onClick={(e) => {
