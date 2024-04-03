@@ -1,15 +1,9 @@
 import { NextResponse } from "next/server";
-import { initializeFirebaseAdmin } from "@/lib/firebase-admin";
 
 export const dynamic = "force-dynamic"; // defaults to auto
 export async function GET(request: Request) {
   try {
-    const path = "fetchedData";
-    const { storage } = await initializeFirebaseAdmin();
-
-    await storage.deleteFiles({
-      prefix: path,
-    });
+    await fetch(process.env.MAIN_LAMBDA_FUNCTION_URL!);
 
     return NextResponse.json({
       status: 200,

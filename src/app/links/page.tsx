@@ -13,9 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Links() {
-  const { links, info } = await getCachedData("links");
+  const links = await getCachedData("links");
+  const info = await getCachedData("info");
   return (
-    <main className="py-12">
+    <main className="py-8 sm:py-12">
       <div className="flex flex-col items-center justify-center">
         <Image
           className="rounded-[50%]"
@@ -25,33 +26,31 @@ export default async function Links() {
           height={100}
           alt={info.name}
         />
-        <h1 className="mt-3 font-display text-xl font-bold">{info.name}</h1>
+        <h1 className="mt-3 text-xl font-bold">{info.name}</h1>
         <div className="mt-3">
           {links.map((link: any) => (
             <Link
               target="_blank"
               href={
-                link.link.startsWith("http")
-                  ? link.link
-                  : `https://${link.link}`
+                link.url.startsWith("http") ? link.url : `https://${link.url}`
               }
-              key={link.id}
+              key={link.url}
               className={classNames(
                 "remove-effect mt-4 flex items-center overflow-hidden rounded border",
                 styles.link,
               )}
             >
               <img
-                alt={link.data.title}
-                src={link.data.image}
+                alt={link.title}
+                src={link.image}
                 className="h-[90px] w-[90px] bg-black object-cover"
               />
               <div className="px-3">
-                <p>{link.data.title}</p>
+                <p>{link.title}</p>
                 <p className="mt-1 w-full max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap text-xs text-[var(--secondary-color)] md:max-w-lg">
-                  {link.data.description}
+                  {link.description}
                 </p>
-                <p className="text-xs">{`${link.data.url.split("/")[2]}`}</p>
+                <p className="text-xs">{`${link.url.split("/")[2]}`}</p>
               </div>
             </Link>
           ))}

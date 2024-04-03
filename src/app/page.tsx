@@ -6,7 +6,7 @@ export default async function Home() {
   const { info, projects } = await getCachedData("home");
 
   return (
-    <main className="py-16">
+    <main className="py-8 sm:py-12">
       <h1 className="font-display text-3xl">{info.name}</h1>
       <p className="text-[var(--secondary-color)]">{info.designation}</p>
       <div
@@ -20,7 +20,7 @@ export default async function Home() {
       <h2 className="text-xl font-bold">Projects</h2>
       <div className="mt-5">
         {projects.map((project: any) => {
-          return <Project key={project.id} project={project} />;
+          return <Project key={project.github_url} project={project} />;
         })}
         <div className="flex items-center justify-center pt-5">
           <Link href={"/projects"}>View more</Link>

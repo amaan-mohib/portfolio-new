@@ -5,7 +5,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import MainWrapper from "../components/MainWrapper/MainWrapper";
 import BackgroundSwitcher from "../components/BackgroundSwitcher";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { getCachedData } from "@/actions/getCachedData";
 import { convert } from "html-to-text";
 
@@ -24,9 +24,12 @@ export async function generateMetadata({
   params,
   searchParams,
 }: any): Promise<Metadata> {
-  const { info } = await getCachedData("info");
+  const info = await getCachedData("info");
 
   const description = convert(info.description);
+
+  const headerList = headers();
+  const host = headerList.get("host");
 
   return {
     title: {
@@ -34,12 +37,20 @@ export async function generateMetadata({
       default: `${info.name}`,
     },
     description,
-    keywords: ["Next.js", "React", "JavaScript", "Portfolio", info.name],
+    keywords: [
+      "Next.js",
+      "React",
+      "JavaScript",
+      "TypeScript",
+      "Software Engineer",
+      "Portfolio",
+      info.name,
+    ],
     authors: [{ name: info.name }],
     creator: info.name,
     publisher: info.name,
     openGraph: {
-      url: `https://${process.env.VERCEL_URL}`,
+      url: `https://${host}`,
       title: {
         template: `${info.name} - %s`,
         default: `${info.name}`,
@@ -87,7 +98,7 @@ export default function RootLayout({
         className={`${sourceSerif.variable} ${ibmPlexMono.variable} ${ibmPlexMono.className}`}
       >
         <BackgroundSwitcher>
-          <div className="relative mx-auto max-w-3xl px-3">
+          <div className="relative mx-auto max-w-3xl px-5">
             <Header />
             <MainWrapper>{children}</MainWrapper>
             <Footer />

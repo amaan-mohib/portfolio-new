@@ -21,7 +21,7 @@ const Footer: FC<FooterProps> = () => {
     <div
       className={classNames(
         styles.Footer,
-        "px-3",
+        "px-5",
         "max-w-3xl",
         "mx-auto",
         "text-sm",

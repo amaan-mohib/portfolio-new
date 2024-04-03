@@ -11,7 +11,7 @@ const Header: FC<HeaderProps> = () => {
     <div
       className={classNames(
         styles.Header,
-        "px-3",
+        "px-5",
         "max-w-3xl",
         "mx-auto",
         "flex",

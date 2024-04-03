@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Resume() {
-  const { info: data } = await getCachedData("info");
+  const data = await getCachedData("info");
 
   if (data?.resume) {
     redirect(data.resume);

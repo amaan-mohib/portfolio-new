@@ -353,6 +353,7 @@
 
 .Kotlin {
   background-color: #f18e33;
+  color: #000;
 }
 
 .KRL {
@@ -701,6 +702,7 @@
 
 .Svelte {
   background-color: #ff3e00;
+  color: #101010;
 }
 
 .Swift {
@@ -793,4 +795,43 @@
 
 .Zephir {
   background-color: #118f9e;
+}
+
+.Firebase {
+  background-color: #FFCB2D;
+  color: #000;
+}
+
+.MongoDB {
+  background-color: #55AD47;
+  color: #000;
+}
+
+.Node\.js {
+  background-color: #80BD00;
+  color: #000;
+}
+
+.Socket\.io,
+.Flask {
+  background-color: #000;
+}
+
+.React,
+.React\.js {
+  background-color: #087EA4;
+}
+
+.Android {
+  background-color: #50B35D;
+  color: #000;
+}
+
+.MySQL {
+  background-color: #08668E;
+}
+
+.React_Native {
+  background-color: #61DAFB;
+  color: #000;
 }

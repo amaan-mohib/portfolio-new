@@ -17,15 +17,15 @@ export default async function Projects() {
   const { projects, description } = await getCachedData("projects");
 
   return (
-    <main className="py-16">
+    <main className="py-8 sm:py-12">
       <h1 className="font-display text-3xl">Projects</h1>
       <div
         className={classNames("mt-4", styles.description)}
         dangerouslySetInnerHTML={{ __html: description }}
       ></div>
-      <div className="grid grid-cols-1 gap-x-5 md:grid-cols-2">
+      <div className="mt-5 grid grid-cols-1 gap-x-5 md:grid-cols-2">
         {projects.map((project: any) => {
-          return <Project key={project.id} project={project} />;
+          return <Project key={project.github_url} project={project} />;
         })}
       </div>
       <div className="mt-5 flex items-center justify-center">
