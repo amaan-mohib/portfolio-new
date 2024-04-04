@@ -13,4 +13,23 @@
       text-decoration-color: #1d4ed8;
     }
   }
+
+  h1,
+  h2 {
+
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+}
+
+.markdown>* {
+  margin: 10px 0;
 }

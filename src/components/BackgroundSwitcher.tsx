@@ -13,16 +13,12 @@ const BackgroundSwitcher: React.FC<BackgroundSwitcherProps> = ({
   useEffect(() => {
     let bgColor = "var(--bg-home)";
 
-    switch (pathname) {
-      case "/projects":
-        bgColor = "var(--bg-projects)";
-        break;
-      case "/links":
-        bgColor = "var(--bg-links)";
-        break;
-      default:
-        bgColor = "var(--bg-home)";
+    if (pathname.startsWith("/projects")) {
+      bgColor = "var(--bg-projects)";
+    } else if (pathname.startsWith("/links")) {
+      bgColor = "var(--bg-links)";
     }
+
     document.body.style.backgroundColor = bgColor;
     document.documentElement.style.setProperty("--bg-color", bgColor);
   }, [pathname]);

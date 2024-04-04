@@ -15,17 +15,19 @@ interface ProjectsProps {
       color: string;
     }[];
     language?: string;
+    fallbackName: string;
     description: string | null;
+    slug: string;
   };
 }
 
 const Project: FC<ProjectsProps> = ({ project }) => (
   <div
-    className="mt-5 rounded border"
+    className="mt-5 flex flex-col rounded border"
     style={{ borderColor: "rgba(var(--foreground-rgb), .2)" }}
   >
     <div
-      className="flex items-center border-b px-5 py-3"
+      className="flex min-h-[57px] items-center border-b px-5 py-3"
       style={{ borderColor: "rgba(var(--foreground-rgb), .2)" }}
     >
       {project.image ? (
@@ -39,6 +41,7 @@ const Project: FC<ProjectsProps> = ({ project }) => (
       ) : null}
       <Link href={project.github_url} className="flex items-center font-bold">
         {project.name ||
+          project.fallbackName ||
           project.github_url
             .split("/")
             .filter((item) => !!item)
@@ -80,8 +83,15 @@ const Project: FC<ProjectsProps> = ({ project }) => (
         </div>
       )}
     </div>
-    <div className="px-5 py-3 text-sm text-[var(--secondary-color)]">
-      {project.description || ""}
+    <div className="flex h-full flex-col justify-between px-5 py-3 text-sm">
+      <div className="text-[var(--secondary-color)]">
+        {project.description || ""}
+      </div>
+      <div className="mt-3 text-xs">
+        <Link href={`/projects/${project.slug || project.name}`}>
+          View more
+        </Link>
+      </div>
     </div>
   </div>
 );
