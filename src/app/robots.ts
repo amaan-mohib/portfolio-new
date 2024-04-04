@@ -12,5 +12,10 @@ export default function robots(): MetadataRoute.Robots {
       disallow: "/private/",
     },
     sitemap: `https://${host}/sitemap.xml`,
+    ...(host
+      ? {
+          host,
+        }
+      : {}),
   };
 }
