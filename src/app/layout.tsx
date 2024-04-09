@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
+import { IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import "./globals.scss";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -8,8 +8,8 @@ import BackgroundSwitcher from "../components/BackgroundSwitcher";
 import { cookies, headers } from "next/headers";
 import { getCachedData } from "@/actions/getCachedData";
 import { convert } from "html-to-text";
+import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   variable: "--display-font",
@@ -106,6 +106,7 @@ export default function RootLayout({
             <Header />
             <MainWrapper>{children}</MainWrapper>
             <Footer />
+            <Analytics />
           </div>
         </BackgroundSwitcher>
       </body>
