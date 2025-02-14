@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   }
 
   return {
-    title: project.name,
+    title: project.name || project.fallbackName,
     description: project.description,
   };
 }
