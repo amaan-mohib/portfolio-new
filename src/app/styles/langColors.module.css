@@ -588,7 +588,7 @@
   background-color: #1d222d;
 }
 
-.Python {
+.Python, .Tauri {
   background-color: #3572a5;
 }
 
@@ -833,5 +833,10 @@
 
 .React_Native {
   background-color: #61DAFB;
+  color: #000;
+}
+
+.SpringBoot {
+  background-color: #6DB33F;
   color: #000;
 }
